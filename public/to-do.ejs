@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO LIST</title>
+</head>
+<body>
+    <h1>TO-DO LIST</h1>
+    <form method="POST" action="/add">
+        <input class="task-box" type="text" name="task" placeholder="Your Task" required><br>
+        <input class="btn" type="submit">
+        <% if (error){%>
+          <p style="color: red;"> <%= error%></p>
+          <%}%>
+    </form>
+
+    <ul>
+        <% tasks.forEach((task, index) =>{%>
+            <li class="delete">
+              <span><%=task%></span>
+              <form action="/delete" method="POST">
+                <input type="hidden" name="index" value="<%= index %>" >
+                <button type="submit" class="cross-button">❌</button>
+              </form>
+            </li>
+        <%})%>
+    </ul>
+
+    <style>
+        h1{
+            text-align: center;
+            color: blue;
+        }
+       
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+  }
+  .task-box{
+    padding: 0.4rem 1.5rem;
+  }
+  .btn{
+    margin-top: 20px;
+    padding: 10px 35px;
+  }
+  form {
+    text-align: center;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+  }
+
+  li {
+    background-color: #f2f2f2;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 5px;
+    width: 300px;
+  }
+.cross-button{
+   border: none;
+   cursor: pointer;
+   background: transparent;
+   margin-left: 17rem;
+   font-size: inherit;
+   &:hover{
+    font-size: 17px;
+   }
+}
+.delete{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.delete span{
+  position: absolute;
+}
+
+    </style>
+</body>
+</html>
